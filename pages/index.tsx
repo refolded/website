@@ -103,10 +103,10 @@ export default function Home() {
             </span>
           </button>
         </section>
-        <section
+        {/* <section
           ref={mainSection}
           className='flex flex-col justify-center items-center w-full h-screen'
-        ></section>
+        ></section> */}
       </main>
     </>
   );
