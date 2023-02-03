@@ -1,10 +1,30 @@
+import { useIntersectionObserver } from '@refolded/hooks';
 import Head from 'next/head';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const videoTag = useRef<HTMLVideoElement | null>(null);
-  const mainSection = useRef<HTMLElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { container: videoContainer, isVisible: videoIsVisible } =
+    useIntersectionObserver({
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    });
+
+  const togglePlayback = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      (videoContainer?.current as unknown as HTMLVideoElement)?.pause?.();
+    } else {
+      setIsPlaying(true);
+      (videoContainer?.current as unknown as HTMLVideoElement)?.play?.();
+    }
+  };
+
+  useEffect(() => {
+    togglePlayback();
+  }, [videoIsVisible]);
+
   return (
     <>
       <Head>
@@ -15,16 +35,16 @@ export default function Home() {
       </Head>
       <main className='w-full font-sans'>
         <video
-          ref={videoTag}
+          ref={videoContainer}
           autoPlay
           playsInline
           muted
           loop
-          className='absolute z-0 isolate w-full h-full object-cover motion-reduce:hidden'
+          className='absolute z-0 inset-0 w-full h-full max-h-screen object-cover motion-reduce:hidden'
         >
           <source src='/assets/homebackground.mp4' />
         </video>
-        <section className='flex flex-col justify-center items-center w-full h-screen backdrop-brightness-[0.3] backdrop-grayscale'>
+        <div className='flex flex-col justify-center items-center w-full h-screen backdrop-brightness-[0.3] backdrop-grayscale'>
           <h1 className='font-bold text-7xl font-serif tracking-wider pb-3'>
             refolded
           </h1>
@@ -42,15 +62,7 @@ export default function Home() {
           </svg>
 
           <button
-            onClick={() => {
-              if (isPlaying) {
-                setIsPlaying(false);
-                videoTag?.current?.pause?.();
-              } else {
-                setIsPlaying(true);
-                videoTag?.current?.play?.();
-              }
-            }}
+            onClick={togglePlayback}
             className='absolute bottom-5 left-5 scale-150 hover:scale-[2] duration-200 transition-all motion-reduce:transition-none pb-6'
           >
             {isPlaying ? (
@@ -79,14 +91,7 @@ export default function Home() {
               </svg>
             )}
           </button>
-          <button
-            onClick={() =>
-              mainSection?.current?.scrollIntoView({
-                behavior: 'smooth',
-              })
-            }
-            className='absolute bottom-14 flex flex-col items-center justify-center text-gray-200'
-          >
+          <span className='absolute bottom-14 flex flex-col items-center justify-center text-gray-200'>
             <p className='py-3 text-xl'>Scroll to learn more</p>
             <span className='animate-levitate motion-reduce:animate-none mt-4'>
               <svg
@@ -101,12 +106,8 @@ export default function Home() {
                 />
               </svg>
             </span>
-          </button>
-        </section>
-        {/* <section
-          ref={mainSection}
-          className='flex flex-col justify-center items-center w-full h-screen'
-        ></section> */}
+          </span>
+        </div>
       </main>
     </>
   );
