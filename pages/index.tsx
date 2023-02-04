@@ -45,22 +45,26 @@ export default function Home() {
           <source src='/assets/homebackground.mp4' />
         </video>
         <div className='flex flex-col justify-center items-center w-full h-screen backdrop-brightness-[0.3] backdrop-grayscale'>
-          <h1 className='font-bold text-7xl font-serif tracking-wider pb-3'>
-            refolded
-          </h1>
-          <svg
-            width={90}
-            height={90}
-            viewBox='0 0 1000 1000'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
+          <a
+            className='flex flex-col justify-center items-center'
+            href='https://github.com/refolded'
           >
-            <path
-              d='M250 375V166.667H541.667V375H958.333V666.667H750V875H458.333V666.667H41.6666V375H250ZM666.667 666.667H541.667V791.667H666.667V666.667ZM333.333 375H458.333V250H333.333V375ZM250 583.333V458.333H125V583.333H250ZM750 458.333V583.333H875V458.333H750ZM541.667 458.333V583.333H666.667V458.333H541.667ZM333.333 458.333V583.333H458.333V458.333H333.333Z'
-              fill='#fff'
-            />
-          </svg>
-
+            <h1 className='font-bold text-7xl font-serif tracking-wider pb-3'>
+              refolded
+            </h1>
+            <svg
+              width={90}
+              height={90}
+              viewBox='0 0 1000 1000'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M250 375V166.667H541.667V375H958.333V666.667H750V875H458.333V666.667H41.6666V375H250ZM666.667 666.667H541.667V791.667H666.667V666.667ZM333.333 375H458.333V250H333.333V375ZM250 583.333V458.333H125V583.333H250ZM750 458.333V583.333H875V458.333H750ZM541.667 458.333V583.333H666.667V458.333H541.667ZM333.333 458.333V583.333H458.333V458.333H333.333Z'
+                fill='#fff'
+              />
+            </svg>
+          </a>
           <button
             onClick={togglePlayback}
             className='absolute bottom-5 left-5 scale-150 hover:scale-[2] duration-200 transition-all motion-reduce:transition-none pb-6'
@@ -92,8 +96,8 @@ export default function Home() {
             )}
           </button>
           <span className='absolute bottom-14 flex flex-col items-center justify-center text-gray-200'>
-            <p className='py-3 text-xl'>Scroll to learn more</p>
-            <span className='animate-levitate motion-reduce:animate-none mt-4'>
+            <p className='py-3 text-xl'>More coming soon</p>
+            {/* <span className='animate-levitate motion-reduce:animate-none mt-4'>
               <svg
                 className='w-7 h-7'
                 viewBox='0 0 24 24'
@@ -105,7 +109,7 @@ export default function Home() {
                   fill='currentColor'
                 />
               </svg>
-            </span>
+            </span> */}
           </span>
         </div>
       </main>
